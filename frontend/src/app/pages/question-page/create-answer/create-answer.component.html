@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Add Answer</h1>
+<form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+
+        <mat-form-field>
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.name">
+                    {{category.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.category.hasError('required')">This field is required</mat-error>
+        </mat-form-field>
+        <button mat-mini-fab (click)="addCategory()" class="ml-2" color="default">
+            <mat-icon>add</mat-icon>
+        </button>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Please insert answer</mat-label>
+            <textarea matInput formControlName="content" class="full-width"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="float-right">
+        <button mat-raised-button (click)="onNoClick()">Cancel</button>
+        <button mat-raised-button type="submit" cdkFocusInitial *ngIf="!isAnswered">Add Answer</button>
+        <button mat-raised-button type="submit" cdkFocusInitial *ngIf="isAnswered">Edit Answer</button>
+    </div>
+</form>
+

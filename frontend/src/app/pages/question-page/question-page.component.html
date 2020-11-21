@@ -1,0 +1,74 @@
+<div class="container" *ngIf="!this.isWrongID && (this.isMine || isApproved) && this.isLoading">
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="header-image"></div>
+            <mat-card-title>
+                <span>By {{this.question.createdBy === undefined || this.question.createdBy === null ? 'Guest' : this.question.createdBy.firstName + ' ' + this.question.createdBy.lastName}}</span>
+            </mat-card-title>
+            <button mat-raised-button color="primary" class="float-right" (click)="approve()" *ngIf="!isApproved && isAdmin"><mat-icon>done</mat-icon> Approve</button>
+            <button mat-raised-button color="primary" class="float-right" (click)="approve()" *ngIf="isApproved && isAdmin"><mat-icon>close</mat-icon> Disapprove</button>
+
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+            <div class="row image-part">
+                <div class="col-lg-3 text-center" *ngFor="let picture of question.picture">
+                    <img mat-card-image [src]="baseUrl + 'public/' + picture">
+                    <mat-icon class="text-danger delete-icon" *ngIf="isMine" (click)="deleteImage(picture)">delete</mat-icon>
+                </div>
+
+                <div class="col-lg-3 text-center mb-auto mt-auto">
+                    <button mat-fab color="default" *ngIf="isMine" (click)="addImage()"><mat-icon class="font-weight-bold add-icon">add</mat-icon></button>
+                </div>
+            </div>
+            <br>
+            <div class="row question-part">
+                <div class="col-lg-2 pt-1 pb-1">
+                    <h3 class="mb-0">Question:</h3>
+                </div>
+                <div class="col-lg-9 pt-2 pb-2">
+                    <h4 class="mb-0">{{question.title}}</h4>
+                </div>
+                <div class="col-lg-1">
+                    <button mat-mini-fab color="default" *ngIf="isMine" (click)="editQuestion()"><mat-icon>edit</mat-icon></button>
+                </div>
+            </div>
+            <br>
+
+            <div class="row answer-part" *ngIf="isAnswered">
+                <div class="col-lg-2">
+                    <h3>Answer:</h3>
+                </div>
+                <div class="col-10">
+                    <p>
+                        <mat-chip-list>
+                            <mat-chip color="primary" selected>{{question.answer.category}}</mat-chip>
+                        </mat-chip-list>
+                    </p>
+                    <p class="bg-light">
+                        {{question.answer.content}}
+                    </p>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col">
+                    <button mat-raised-button color="primary" (click)="gotoQuestionList()"><mat-icon>list</mat-icon> Question List</button>
+                    <button mat-raised-button color="accent" class="float-right" (click)="answer()" *ngIf="isAdmin && !isAnswered"><mat-icon>save_alt</mat-icon> Answer</button>
+                    <button mat-raised-button color="accent" class="float-right" (click)="editAnswer()" *ngIf="isAdmin && isAnswered"><mat-icon>edit</mat-icon> Edit Answer</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="container" *ngIf="this.isWrongID && this.isLoading">
+    <h1>404 Page not found!</h1>
+</div>
+<div class="container" *ngIf="!this.isWrongID && !(this.isApproved || this.isLastPostedQuestion || this.isMine) && this.isLoading">
+    <h1>This question is not approved</h1>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait. </p>
+</ngx-spinner>

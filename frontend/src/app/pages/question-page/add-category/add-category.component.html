@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Add Category</h1>
+<div mat-dialog-content>
+    <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Please insert category name</mat-label>
+        <input type="text" matInput [(ngModel)]="category" class="full-width">
+    </mat-form-field>
+    <p class="text-danger" *ngIf="isRequired">This field is required</p>
+    <p class="text-danger" *ngIf="error">{{error}}</p>
+</div>
+<div mat-dialog-actions class="float-right">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="addCategory()" cdkFocusInitial>Add Category</button>
+</div>
+

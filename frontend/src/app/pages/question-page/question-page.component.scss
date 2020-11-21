@@ -1,0 +1,54 @@
+.header-image {
+    background-image: url('src/assets/image/default-avatar.png');
+    background-size: cover;
+}
+
+.mat-card-image {
+    width: 200px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+.row img {
+    margin: 5px auto;
+    border-radius: 5px;
+}
+
+.image-part div:hover {
+    cursor: pointer;
+    img {
+        opacity: 0.7;
+    }
+    .delete-icon {
+        display: inline-block;
+    }
+}
+
+.row div {
+    .delete-icon {
+        //display: none;
+    }
+}
+
+.add-icon {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.delete-icon {
+    margin: 0;
+    position: absolute;
+}
+
+::ng-deep .mat-card-header-text {
+    margin-right: auto!important;
+}
+
+.question-part{
+    background-color: #f5f6f7;
+}

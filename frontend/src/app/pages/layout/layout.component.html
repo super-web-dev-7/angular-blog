@@ -1,0 +1,35 @@
+<mat-toolbar class="header">
+    <mat-toolbar-row>
+        <a mat-button routerLink="/dashboard" routerLinkActive="active" class="logo-button">
+            <img src="assets/image/images.png" class="logo-image" >
+            <span class="logo-title">Question and Answer
+            </span>
+        </a>
+        <span class="spacer"></span>
+        <span *ngIf="isLoggedIn">
+            <button mat-button [matMenuTriggerFor]="aboveMenu" class="user-button">
+                <img src="assets/image/default-avatar.png" class="avatar">
+                {{this.currentUser.firstName}} {{this.currentUser.lastName}}
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #aboveMenu="matMenu" yPosition="above" xPosition="before">
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>power_settings_new</mat-icon>
+                    Log out
+                </button>
+            </mat-menu>
+        </span>
+        <span *ngIf="!isLoggedIn">
+            <button mat-stroked-button class="user-button" (click)="gotoLogin()">
+                <mat-icon>person</mat-icon>
+                Log in
+            </button>
+            <button mat-stroked-button class="user-button" (click)="gotoRegister()">
+                <mat-icon>create</mat-icon>
+                Register
+            </button>
+        </span>
+
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

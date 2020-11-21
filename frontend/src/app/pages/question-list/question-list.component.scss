@@ -1,0 +1,58 @@
+input[type=search] {
+    border-radius: 50px;
+}
+
+.example-section {
+    margin-top: 20px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.approved-icon {
+    //transform: scale(1);
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 50%;
+    color: white;
+    background-color: #14bff4;
+    vertical-align: middle;
+    line-height: 25px;
+    text-align: center;
+}
+
+.mat-card-content {
+    //background-color: #ff00ff;
+}
+
+.mat-card-image {
+    width: 100%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .mat-card-image {
+        width: 200px;
+    }
+}
+
+.question-footer {
+    height: 30px;
+}
+
+.question-content {
+    height: 225px;
+}
+
+.question-item:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.mat-chip {
+    padding: 1px 12px;
+    min-height: 20px;
+}

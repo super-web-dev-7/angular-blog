@@ -1,0 +1,89 @@
+<div class="container">
+    <mat-card class="bg-light">
+        <mat-card-header>
+            <mat-card-title>Question List</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <br>
+            <div class="row">
+                <div class="col-lg-3">
+                    <h6>Filters answered</h6>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <label>
+                        <span class="pl-2">Please input keyword</span>
+                        <input type="search" class="form-control" placeholder="free search" [(ngModel)]="keyword"
+                               (keyup)="filter()">
+                    </label>
+                    <br>
+                    <br>
+                    <mat-form-field>
+                        <mat-label>Select Category</mat-label>
+                        <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="filter()">
+                            <mat-option value="null">None</mat-option>
+                            <mat-option *ngFor="let category of categories" [value]="category.name">
+                                {{category.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+
+                    <section class="example-section">
+                        <mat-slide-toggle [(ngModel)]="isAnswered" (change)="filter()"
+                                          class="example-margin" color="default" labelPosition="before">
+                            Answered Only
+                        </mat-slide-toggle>
+                    </section>
+                    <section class="example-section" *ngIf="isAdmin">
+                        <mat-slide-toggle [(ngModel)]="isApproved" (change)="filter()"
+                                          class="example-margin" color="default" labelPosition="before">
+                            Approved Only
+                        </mat-slide-toggle>
+                    </section>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br><br>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="search-results"
+                         infinite-scroll
+                         [infiniteScrollDistance]="scrollDistance"
+                         [infiniteScrollUpDistance]="scrollUpDistance"
+                         [infiniteScrollThrottle]="throttle"
+                         (scrolled)="onScrollDown($event)"
+                         (scrolledUp)="onUp($event)">
+                        <div class="row">
+
+                            <div class="col-lg-4 mb-2 col-md-6 col-sm-6 question-item"
+                                 *ngFor="let question of questionLists" (click)="gotoQuestionPage(question)">
+                                <mat-card>
+                                    <mat-card-content class="question-content">
+                                        <img mat-card-image class="rounded p-2 rounded-right"
+                                             [src]="baseUrl + 'public/' + question.picture[0]" *ngIf="question.picture.length !== 0">
+                                        <img mat-card-image class="rounded p-2 rounded-right"
+                                             src="assets/image/default.jpg" *ngIf="question.picture.length === 0">
+                                        <p>{{question.title | slice : 0 : 20}} </p>
+                                    </mat-card-content>
+                                    <mat-divider></mat-divider>
+                                    <mat-card-footer class="pl-3 pt-1 pb-1 question-footer">
+                                        <mat-chip-list>
+                                            <mat-chip color="primary" *ngIf="question.approved" selected>
+                                                Approved
+                                            </mat-chip>
+                                            <mat-chip color="accent" *ngIf="question.isAnswered" selected>
+                                                Answered
+                                            </mat-chip>
+                                        </mat-chip-list>
+                                    </mat-card-footer>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

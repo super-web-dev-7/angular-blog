@@ -1,0 +1,41 @@
+.avatar {
+    width: 35px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.logo-image {
+    width: 40px;
+}
+
+.logo-title {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 28px;
+    font-family: ITC Bauhaus;
+}
+
+@media only screen and (max-width: 768px) {
+    .logo-title {
+        display: none;
+    }
+}
+
+.mat-menu-item .mat-icon {
+    margin-right: 3px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.user-button {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.header {
+    background: linear-gradient(90deg,#6f8cb1 0,#46b6b7 50%,#1eddbc);
+}
+
+
